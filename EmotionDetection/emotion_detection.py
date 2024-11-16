@@ -32,7 +32,6 @@ def emotion_detector(text_to_analyze):
     emotion_dict = emotions[0]
 
 
-
     # validate response
     # parse data from the information
     if response.status_code == 200:
@@ -41,6 +40,7 @@ def emotion_detector(text_to_analyze):
         fear_score = emotion_dict['emotion']['fear']
         joy_score = emotion_dict['emotion']['joy']
         sadness_score = emotion_dict['emotion']['sadness']
+        dominant_emotion = 0
 
     elif response.status_code == 500:
         anger_score = None
@@ -48,6 +48,7 @@ def emotion_detector(text_to_analyze):
         fear_score = None
         joy_score = None
         sadness_score = None
+        dominant_emotion = None
 
     # place scores in an dictionary for comparison
     # the key is the emotion's name as a string
@@ -61,16 +62,19 @@ def emotion_detector(text_to_analyze):
                 }
 
 
-    # for loop will loop through dictionary and find highest value
-    # emotion returns as a string and is the the emotions.key
-    # emotions[emotion] returns as a float and is of emotions.value
+   
 
-    dominant_emotion_value = 0  # set variable for use within loop
+    # validate the value returend based on dominant_emotion    
+    if dominant_emotion != None:
+        dominant_emotion_value = 0  # set variable for use within loop
 
-    for emotion in emotions:
-        if emotions[emotion] > dominant_emotion_value:
-            dominant_emotion_value = emotions[emotion]
-            dominant_emotion = emotion
+        # for loop will loop through dictionary and find highest value
+        # emotion returns as a string and is the the emotions.key
+        # emotions[emotion] returns as a float and is of emotions.value
+        for emotion in emotions:
+            if emotions[emotion] > dominant_emotion_value:
+                dominant_emotion_value = emotions[emotion]
+                dominant_emotion = emotion
 
     # update the emotions dictionary to include the dominant emotion
     # tested and works
