@@ -1,13 +1,6 @@
 import requests
 import json
 
-'''
-Copy and paste into terminal for test
-
-from emotion_detection import emotion_detector
-emotion_detector("I love this new technology")
-
-'''
 
 def emotion_detector(text_to_analyze):
     # url to Watson API
@@ -62,9 +55,7 @@ def emotion_detector(text_to_analyze):
                 }
 
 
-   
-
-    # validate the value returend based on dominant_emotion    
+    # validate the value returned based on dominant_emotion    
     if dominant_emotion != None:
         dominant_emotion_value = 0  # set variable for use within loop
 
